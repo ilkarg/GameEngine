@@ -1,34 +1,35 @@
+#pragma comment(lib, "SDLLib/SDL2_mixer.lib")
+
 #include <SDL.h>
+#include <SDL_audio.h>
+#include <SDL_mixer.h>
 #include "Window.h"
 #include "Player.h"
 #include "Sprite.h"
+#include "MainSystem.h"
+#include "Sound.h"
 
 int main(int argc, char** args) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-        return 1;
+    MainSystem().InitEngine();
 
     Window window = Window(800, 600, "My Window");
 
     window.Show();
     window.RendererInit();
 
+    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
+
+
     Sprite hero = Sprite("hero.bmp");
 
-    Player player1 = Player(150, 150, 300, 200, SDL_LoadBMP(hero.Path), window.Renderer);
-    Player player2 = Player(500, 500, 200, 200, SDL_LoadBMP(hero.Path), window.Renderer);
+    Player player = Player(150, 150, 300, 200, SDL_LoadBMP(hero.Path), window.Renderer);
 
-    SDL_Texture* texture[] = { player1.Sprite, player2.Sprite };
-    SDL_Rect size[] = { player1.Size, player2.Size };
-    SDL_Rect properties[] = { player1.Properties, player2.Properties };
-    Player player[] = { player1, player2 };
-
-    window.AddObjects(texture, size, properties);
+    window.AddObject(player.Sprite, player.Size, player.Properties);
 
     while (true) {
         while (SDL_PollEvent(&window.Event) != 0) {
             if (window.Event.type == SDL_QUIT) {
-                window.DestroyAll(player);
-                return 0;
+                MainSystem().ExitFromEngine(window, player);
             }
             else if (window.Event.type == SDL_KEYDOWN) {
                 if (window.Event.key.keysym.sym == SDLK_w) printf("W pressed\n");
