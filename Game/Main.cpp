@@ -8,6 +8,8 @@
 #include "Sprite.h"
 #include "MainSystem.h"
 #include "Sound.h"
+#include "JsonFile.h"
+#include "json.hpp"
 
 int main(int argc, char** args) {
     MainSystem().InitEngine();
@@ -17,10 +19,16 @@ int main(int argc, char** args) {
     window.Show();
     window.RendererInit();
 
-    Sound music = Sound("Sound.wav", 0);
-    Sound music2 = Sound("Music/Sound.wav", 1);
+    //Sound music = Sound("Sound.wav", 0);
+    //Sound music2 = Sound("Music/Sound.wav", 1);
     Sprite hero = Sprite("hero.bmp");
     Player player = Player(150, 150, 300, 200, SDL_LoadBMP(hero.Path), window.Renderer);
+
+    //JsonFile config = JsonFile("test.json");
+
+    //json data = config.ReadFile();
+
+    //std::cout << data << std::endl;
 
     window.AddObject(player.Sprite, player.Size, player.Properties);
 

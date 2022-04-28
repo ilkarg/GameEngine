@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="JsonFile.cpp" />
     <ClCompile Include="MainSystem.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="JsonFile.h" />
     <ClInclude Include="MainSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sound.h" />
