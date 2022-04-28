@@ -6,7 +6,7 @@
 
 class Sound {
 public:
-	Mix_Chunk* File;
+	Mix_Music* File;
 	int Channel;
 
 	Sound(const char* path, int channel);

@@ -17,11 +17,9 @@ int main(int argc, char** args) {
     window.Show();
     window.RendererInit();
 
-    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
-
-
+    Sound music = Sound("Sound.wav", 0);
+    Sound music2 = Sound("Music/Sound.wav", 1);
     Sprite hero = Sprite("hero.bmp");
-
     Player player = Player(150, 150, 300, 200, SDL_LoadBMP(hero.Path), window.Renderer);
 
     window.AddObject(player.Sprite, player.Size, player.Properties);
